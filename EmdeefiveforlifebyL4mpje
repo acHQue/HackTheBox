@@ -1,0 +1,63 @@
+#
+# Really great walkthough with a little input. 
+# https://medium.com/@yaroslav.yaremenko/emdee-five-for-life-59300a88bd64
+
+#edmee script
+
+#curl -s '64.227.47.172:31802'
+
+#Using curl get request into a variable and saving the cookies.
+# -c collect cookies
+html=$(curl -s -c cookies.txt '64.227.47.172:31802')
+echo $html | grep -Po '[\w]{20}'
+
+target=$(echo $html | grep -Po '[\w]{20}')
+
+#echo $target
+
+#extracting the string
+md5hash=$(echo -n $target | md5sum | cut -d " " -f 1)
+
+#The MD5 hash of the string
+echo $md5hash 
+
+
+# -b send cookies
+curl -s -b cookies.txt -d "hash=$md5hash" 64.227.47.172:31802
+
+
+
+
+#My first attempt, was a long way off. No knowledge of the cookies
+# test=$(curl http://64.227.47.172:31802 | grep h3 | grep align | grep h3 | cut -c 67-86);echo $test; curl -X POST -F name="${test}" http://64.227.47.172:31802/index.html
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#HTBNScrIt1G{N1c3_ScrIpt1nG_B0i!}
+
+
+
+
+
+
